@@ -5,7 +5,7 @@
 ---
 
 ## 👥 Desenvolvedores
-* **[José Pedro Martins]** - [(https://github.com/JoseMartinss)]
+* **[José Pedro Martins]** - [https://github.com/JoseMartinss]
 * **[Mário Henrique]** - [https://github.com/mariohenr-ec]
 * **[Vinicius Carreiro]** - [https://github.com/viniciusccmello-dev]
 
