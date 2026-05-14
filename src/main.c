@@ -1,93 +1,101 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
 
-int main()
-{
+/* funções pra cada ação */
+void exibirTutorial();
+void exibirCreditos();
+void iniciarVila(); 
+
+int main() {
     int comando;
     int continuar = 1;
-    int voltar;
 
-    while(continuar == 1)
-    {
-        printf("\n--------------------------------------\n");
-        printf("        MENU PRINCIPAL\n");
+    while (continuar) {
+        system("cls"); 
+
+        printf("--------------------------------------\n");
+        printf("        DUNGEON CRAWLER: NEOGENESE\n");
         printf("--------------------------------------\n");
         printf("1 - Jogar\n");
         printf("2 - Tutorial\n");
         printf("3 - Sair / Creditos\n");
+        printf("\nEscolha seu comando (1, 2 ou 3): ");
 
-        printf("\nEscolha seu comando -- Numero 1, 2 ou 3: ");
-        scanf("%d", &comando);
+        if (scanf("%d", &comando) != 1) {
+            printf("\nErro: Digite apenas numeros!\n");
+            while (getchar() != '\n'); 
+            printf("Pressione qualquer tecla para tentar novamente...");
+            getch();
+            continue;
+        }
 
-        switch(comando)
-        {
+        switch (comando) {
             case 1:
-                printf("\nOnde estara o jogo...\n");
+                /* pra quando fazer o codigo da vila chamar aqui */
+                iniciarVila(); 
                 break;
 
             case 2:
-                printf("\n--------------------------------------\n");
-                printf("              TUTORIAL\n");
-                printf("--------------------------------------\n");
-
-                printf("\nHISTORIA DO JOGO\n\n");
-                printf("No mundo de Neogenese, um grupo deseja liberar um demonio antigo.\n");
-                printf("Os civis sao usados como fonte de energia para rituais em uma torre.\n");
-                printf("Pegue sua arma e salve o mundo dessa ameaca sobre-humana!\n");
-
-                printf("\nCOMO JOGAR\n");
-                printf("Explore a vila, escolha sua arma, atravesse 3 andares e derrote o Boss Final Z.\n");
-
-                printf("\nCONTROLES\n");
-                printf("W - Move para cima\n");
-                printf("A - Move para esquerda\n");
-                printf("S - Move para baixo\n");
-                printf("D - Move para direita\n");
-                printf("I - Interage com objetos\n");
-                printf("O - Realiza ataque\n");
-
-                printf("\nGUIA DE SIMBOLOS\n");
-                printf("^ < > v : Jogador e direcao\n");
-                printf("@       : Chave\n");
-                printf("D       : Porta Fechada\n");
-                printf("=       : Porta Aberta\n");
-                printf("L       : Escada\n");
-                printf("O       : Botao\n");
-                printf("*       : Parede\n");
-                printf("#       : Espinho\n");
-                printf("k       : Caixa destrutivel\n");
-                printf("X       : Monstro Tipo 1\n");
-                printf("Y       : Monstro Tipo 2\n");
-                printf("Z       : Boss Final\n");
-
-                printf("\nDigite 0 para voltar ao menu principal: ");
-                scanf("%d", &voltar);
+                exibirTutorial();
                 break;
 
             case 3:
-                printf("\n--------------------------------------\n");
-                printf("              CREDITOS\n");
-                printf("--------------------------------------\n");
-
-                printf("Desenvolvedores:\n");
-                printf("- Jose Pedro Martins\n");
-                printf("- Mario Henrique\n");
-                printf("- Vinicius Carreiro\n");
-
-                printf("\nDigite 0 para voltar ao menu principal ou 1 para sair: ");
-                scanf("%d", &voltar);
-
-                if(voltar == 1)
-                {
-                    continuar = 0;
-                    printf("\nSaindo do jogo...\n");
-                }
+                exibirCreditos();
+                continuar = 0; 
                 break;
 
             default:
                 printf("\nComando invalido!\n");
+                printf("Pressione qualquer tecla para voltar...");
+                getch();
                 break;
         }
     }
 
     return 0;
+}
+
+/* Codigo em cada Função */
+
+void iniciarVila() {
+    system("cls");
+    printf("--------------------------------------\n");
+    printf("          VILA DE NEOGENESE\n");
+    printf("--------------------------------------\n");
+    printf("\nVoce entrou na vila. Esta area ainda esta em desenvolvimento.\n");
+    printf("\nEm breve: Escolha de armas com o NPC e entrada da masmorra.\n");
+    
+    printf("\n\nPressione qualquer tecla para voltar ao menu principal...");
+    getch();
+}
+
+void exibirTutorial() {
+    system("cls");
+    printf("--------------------------------------\n");
+    printf("              TUTORIAL\n");
+    printf("--------------------------------------\n");
+    printf("\nHISTORIA: No mundo de Neogenese, salve os civis de rituais sombrios!\n");
+    printf("\nCONTROLES:\n");
+    printf("W - Cima | A - Esquerda | S - Baixo | D - Direita\n");
+    printf("I - Interagir | O - Atacar\n");
+    printf("\nSIMBOLOS PRINCIPAIS:\n");
+    printf("@ : Chave   | D : Porta   | L : Escada\n");
+    printf("* : Parede  | # : Espinho | k : Caixa\n");
+    printf("\nPressione qualquer tecla para voltar ao menu...");
+    getch();
+}
+
+void exibirCreditos() {
+    system("cls");
+    printf("--------------------------------------\n");
+    printf("              CREDITOS\n");
+    printf("--------------------------------------\n");
+    printf("Desenvolvido por:\n");
+    printf("- Jose Pedro Martins\n");
+    printf("- Mario Henrique\n");
+    printf("- Vinicius Carreiro\n");
+    printf("\nSaindo do jogo... Obrigado por jogar!\n");
+    printf("Pressione qualquer tecla para fechar...");
+    getch();
 }
