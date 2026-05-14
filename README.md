@@ -38,22 +38,22 @@ derrotar o **Boss Final (Z)** para vencer a aventura.
 ## 🧩 Guia de Símbolos
 
 ### O Jogador e Objetos
-* [cite_start]`< ^ > v` : O Jogador e a direção para onde está olhando[cite: 14].
-* [cite_start]`@` : **Chave** (necessária para abrir portas)[cite: 14].
-* [cite_start]`D` : **Porta Fechada** (bloqueia o caminho)[cite: 14].
-* [cite_start]`=` : **Porta Aberta** (caminho livre)[cite: 15].
-* [cite_start]`L` : **Escada** (avança para o próximo andar)[cite: 15].
-* [cite_start]`O` : **Botão** (ativa mecanismos no mapa)[cite: 14].
+* [cite_start]`< ^ > v` : O Jogador e a direção para onde está olhando.
+* [cite_start]`@` : **Chave** (necessária para abrir portas).
+* [cite_start]`D` : **Porta Fechada** (bloqueia o caminho).
+* [cite_start]`=` : **Porta Aberta** (caminho livre).
+* [cite_start]`L` : **Escada** (avança para o próximo andar).
+* [cite_start]`O` : **Botão** (ativa mecanismos no mapa).
 
 ### Perigos e Obstáculos
-* [cite_start]`*` : **Parede** (intransponível)[cite: 14].
-* [cite_start]`#` : **Espinho** (causa dano fatal e reinicia a fase)[cite: 14, 22].
-* [cite_start]`k` : **Caixa** (pode ser destruída com ataque)[cite: 14].
+* [cite_start]`*` : **Parede** (intransponível).
+* [cite_start]`#` : **Espinho** (causa dano fatal e reinicia a fase).
+* [cite_start]`k` : **Caixa** (pode ser destruída com ataque).
 
 ### Inimigos
-* [cite_start]`X` : **Monstro Tipo 1** (movimentação aleatória)[cite: 15, 25].
-* [cite_start]`Y` : **Monstro Tipo 2** (persegue o jogador)[cite: 15, 28].
-* [cite_start]`Z` : **Boss Final** (comportamento único e desafiador)[cite: 15, 32].
+* [cite_start]`X` : **Monstro Tipo 1** (movimentação aleatória).
+* [cite_start]`Y` : **Monstro Tipo 2** (persegue o jogador).
+* [cite_start]`Z` : **Boss Final** (comportamento único e desafiador).
 
 ---
 
@@ -66,7 +66,7 @@ Ao iniciar na Vila, você deve escolher uma das três armas com o NPC:
 ---
 
 ## 🤖 Declaração de Uso de IA Generativa
-[cite_start]* ESCREVER AQUI [cite: 109].*
+[cite_start]* ESCREVER AQUI *
 
 **Uso de IA:** [Sim/Não]
 **Ferramenta:** [escrever aqui]
