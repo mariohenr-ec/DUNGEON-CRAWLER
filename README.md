@@ -38,22 +38,22 @@ derrotar o **Boss Final (Z)** para vencer a aventura.
 ## 🧩 Guia de Símbolos
 
 ### O Jogador e Objetos
-* [cite_start]`< ^ > v` : O Jogador e a direção para onde está olhando.
-* [cite_start]`@` : **Chave** (necessária para abrir portas).
-* [cite_start]`D` : **Porta Fechada** (bloqueia o caminho).
-* [cite_start]`=` : **Porta Aberta** (caminho livre).
-* [cite_start]`L` : **Escada** (avança para o próximo andar).
-* [cite_start]`O` : **Botão** (ativa mecanismos no mapa).
+* `< ^ > v` : O Jogador e a direção para onde está olhando.
+* `@` : **Chave** (necessária para abrir portas).
+* `D` : **Porta Fechada** (bloqueia o caminho).
+* `=` : **Porta Aberta** (caminho livre).
+* `L` : **Escada** (avança para o próximo andar).
+* `O` : **Botão** (ativa mecanismos no mapa).
 
 ### Perigos e Obstáculos
-* [cite_start]`*` : **Parede** (intransponível).
-* [cite_start]`#` : **Espinho** (causa dano fatal e reinicia a fase).
-* [cite_start]`k` : **Caixa** (pode ser destruída com ataque).
+* `*` : **Parede** (intransponível).
+* `#` : **Espinho** (causa dano fatal e reinicia a fase).
+* `k` : **Caixa** (pode ser destruída com ataque).
 
 ### Inimigos
-* [cite_start]`X` : **Monstro Tipo 1** (movimentação aleatória).
-* [cite_start]`Y` : **Monstro Tipo 2** (persegue o jogador).
-* [cite_start]`Z` : **Boss Final** (comportamento único e desafiador).
+* `X` : **Monstro Tipo 1** (movimentação aleatória).
+* `Y` : **Monstro Tipo 2** (persegue o jogador).
+* `Z` : **Boss Final** (comportamento único e desafiador).
 
 ---
 
@@ -66,7 +66,7 @@ Ao iniciar na Vila, você deve escolher uma das três armas com o NPC:
 ---
 
 ## 🤖 Declaração de Uso de IA Generativa
-[cite_start]* ESCREVER AQUI *
+* ESCREVER AQUI *
 
 **Uso de IA:** [Sim/Não]
 **Ferramenta:** [escrever aqui]
