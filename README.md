@@ -13,7 +13,7 @@
 
 ## 📜 História do Jogo
 
-No mundo de Neogénese, um grupo de pessoas que desejavam liberar um demônio antigo com intuito de dominar o mundo e que vem usando  os civis como fonte de energia para os seus rituais em uma torre absorvendo as suas energias vitais enquanto eles estiverem presos durante o período de preparação para a invocação deste demônio no mundo terreno.
+No mundo de Neogênese, um grupo de pessoas que desejavam liberar um demônio antigo com intuito de dominar o mundo e que vem usando  os civis como fonte de energia para os seus rituais em uma torre absorvendo as suas energias vitais enquanto eles estiverem presos durante o período de preparação para a invocação deste demônio no mundo terreno.
 Os reinos humanos se aliaram e criaram uma base de controle  para auxiliar você: um aventureiro prestes a enfrentar o seu maior desafio. Com um informante e um ferreiro que vai te fornecer armas, o resto será encontrado a partir de restos mortais de antigos bravos aventureiros que foram derrotados em batalhas anteriores. A base dos cultistas tem 3 niveis com entradas secretas e monstros inimáginaveis espalhados por cada andar, pegue sua arma e salve o mundo dessa ameaça Sobre-Humana!
 ---
 
