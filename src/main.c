@@ -56,18 +56,99 @@ int main() {
     return 0;
 }
 
-/* Codigo em cada Função */
+// Codigos presentes em cada funcao:
 
 void iniciarVila() {
-    system("cls");
-    printf("--------------------------------------\n");
-    printf("          VILA DE NEOGENESE\n");
-    printf("--------------------------------------\n");
-    printf("\nVoce entrou na vila. Esta area ainda esta em desenvolvimento.\n");
-    printf("\nEm breve: Escolha de armas com o NPC e entrada da masmorra.\n");
+    /* variaveis locais(essas dai são variaveis pro movimento do player*/
+    char tecla; //para ler a tecla sendo usada (w a s d, etc)
+    int x = 1, y = 1; // Posição inicial do jogador no mapa
+    int proxX, proxY; //var para a logica de movimentação do jogador
+    int i, j;
+    int vidas = 3;
+    char simbolo = '>'; // para onde o jogador começa olhando
     
-    printf("\n\nPressione qualquer tecla para voltar ao menu principal...");
-    getch();
+    /* -- MAPA -- */
+    char mapa[10][10] = {
+        "**********",
+        "*        *",
+        "*        *",
+        "* N      *", 
+        "*        *",
+        "*        *",
+        "*        *",
+        "*        *",
+        "*       L*", 
+        "**********"
+    };
+
+    /* LOOP DA VILA */
+    while (1) {
+        system("cls");
+        
+        // Coloca o símbolo do jogador na matriz antes de imprimir
+        mapa[x][y] = simbolo; //OBS: aqui usei IA para entender a lógica de mostrar o simbolo na matriz
+
+        printf("              --- VILA DE NEOGENESE ---\n\n");
+        printf("Vidas: %d | Use WASD para mover | 'M' para Sair\n\n", vidas);
+
+       	 	 /* == IMPRESSÃO DO MAPA == */
+        //loops para imprimir toda a matriz do mapa
+        for (i = 0; i < 10; i++) {
+            for (j = 0; j < 10; j++) {
+                printf("%c ", mapa[i][j]);
+            }
+            printf("\n");
+        }
+
+        		/* == LEITURA DA TECLA == */
+        tecla = getch(); //OBS: IA usada aqui pra aprender a como ler a tecla
+
+        /* Sai da vila e volta para o menu */
+        if (tecla == 'm' || tecla == 'M') break;
+
+        /* Guarda a posição pretendida */
+    		/*aqui usa as variaveis do movimento, sao atualizadas a cada tecla
+				e imprime a nova posicao na matriz */
+        proxX = x;
+        proxY = y;
+
+        		/* == LÓGICA DE MOVIMENTO E DIREÇÃO == */
+        
+        /* OBS: aqui usei um pouco de IA pra aprender essa logica de quando o X ou o Y
+        	reduz ou aumenta na matriz */
+        	
+ 	   /* COMO FUNCIONA: 
+		 	X -> representa a vertical da matriz
+			Y -> representa a horizontal da matriz
+			exemplo -> por isso que: "proxX--" move o player pra cima, pois
+			ta diminuindo uma unidade da vertical (ou seja, indo sentido a cima da matriz */
+        if (tecla == 'w' || tecla == 'W') { proxX--; simbolo = '^'; }
+        else if (tecla == 's' || tecla == 'S') { proxX++; simbolo = 'v'; }
+        else if (tecla == 'a' || tecla == 'A') { proxY--; simbolo = '<'; }
+        else if (tecla == 'd' || tecla == 'D') { proxY++; simbolo = '>'; }
+
+        		/* == VERIFICAÇÃO DE COLISÃO E LIMPEZA Do RASTRO == */
+        if (mapa[proxX][proxY] != '*') {
+            
+            mapa[x][y] = ' ';  //para deixar vazio a posicao depois de andar
+            /* exatamente aqui nesse X e Y abaixo que a nova posição é 
+			atualizada no mapa: */
+            x = proxX; 
+            y = proxY;
+        }
+        
+        		/* ==  INTERAÇÃO COM NPC == */
+        if (mapa[x][y] == 'N') {
+            printf("\nNPC: Ola heroi! Escolha sua arma no proximo update...");
+            getch();
+            x++; /* OBS IA: esse x++ aqui eu aprendi com a IA pra evitar o bug
+					de o player apagar o NPC do mapa depois de conversar com ele,
+					ja que ele fica na mesma posição da matriz que o NPC durante a fala */
+        }
+        
+        	/* == INTERAÇÃO COM A ESCADA == */
+  	//OBS: aqui onde vai ficar o codigo pra passar pro primeiro andar quando acessar a escada na vila
+    }
 }
 
 void exibirTutorial() {
