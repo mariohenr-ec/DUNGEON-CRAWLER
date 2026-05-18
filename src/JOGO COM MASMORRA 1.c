@@ -209,13 +209,13 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     char mapa[10][11] = {
         "**********",
         "*   k*  L*",
-        "* ** *K***",
-        "* @*     *",
-        "* *****  *",
+        "* ** *D***",
+        "* #*@*k  *",
+        "*D****   *",
         "*    *   *",
-        "* ### ** *",
-        "*      K *",
-        "*        *",
+        "*  ###** *",
+        "*  #   k *",
+        "*      # *",
         "**********"
     };
 
