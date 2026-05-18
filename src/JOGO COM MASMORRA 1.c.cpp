@@ -3,13 +3,13 @@
 #include <conio.h>
 #include <string.h>
 
-/* === PROT”TIPO DAS FUN«’ES === */
+/* === PROT√ìTIPO DAS FUN√á√ïES === */
 void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);//novo prototipo
 
-/* === FUN«√O PRINCIPAL === */
+/* === FUN√á√ÉO PRINCIPAL === */
 int main() {
     int comando;
     int continuar = 1;
@@ -55,7 +55,7 @@ int main() {
     return 0;
 }
 
-/* === FUN«√O DA VILA === */
+/* === FUN√á√ÉO DA VILA === */
 void iniciarVila() {
     char tecla;
     int x = 1, y = 1;
@@ -196,7 +196,7 @@ void iniciarVila() {
     }
 }
 
-/* === FUN«√O DA MASMORRA 1 === Aqui foi onde inserir a funÁ„o void para a masmorra 1, preciso corrigir ainda detalhes*/
+/* === FUN√á√ÉO DA MASMORRA 1 === Aqui foi onde inserir a fun√ß√£o void para a masmorra 1, preciso corrigir ainda detalhes*/
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma) {
     char tecla;
     int x = 1, y = 1;
@@ -397,7 +397,7 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     }
 }
 
-/* === FUN«√O TUTORIAL === TUTORIAL CORRIGIDO */
+/* === FUN√á√ÉO TUTORIAL === TUTORIAL CORRIGIDO */
 void exibirTutorial() {
     system("cls");
 
@@ -448,7 +448,7 @@ void exibirTutorial() {
     getch();
 }
 
-/* === FUN«√O CR…DITOS === */
+/* === FUN√á√ÉO CR√âDITOS === */
 void exibirCreditos() {
     system("cls");
     printf("--------------------------------------\n");
