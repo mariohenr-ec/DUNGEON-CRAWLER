@@ -1,0 +1,235 @@
+
+#define MAP_SIZE_2 15
+
+typedef struct {
+    int x;
+    int y;
+} PositionM2;
+
+typedef struct {
+    PositionM2 pos;
+} MonsterM2;
+
+/* Protótipo da função de movimentação */
+void moverMonstroMasmorra2(MonsterM2 *m, PositionM2 playerPos, char mapa[MAP_SIZE_2][MAP_SIZE_2]);
+
+/* Função Principal da Masmorra 2 */
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma) {
+    char tecla;
+    int x = 11;
+    int y = 1; 
+    int proxX, proxY;
+    int i, j;
+    char simbolo = '>';
+    int chavesColetadas = 0;
+    bool monstroVivo = true;
+
+    MonsterM2 monstro = {{8, 10}}; 
+    PositionM2 espinhosRef[] = { {2, 5}, {3, 5}, {4, 5} };
+
+    char mapa[MAP_SIZE_2][MAP_SIZE_2] = {
+        {'W','W','W','W','W','W','W','W','W','W','W','W','W','W','W'},
+        {'W','.','.','.','W','@','W','.','.','.','.','.','.','L','W'},
+        {'W','.','W','.','W','#','W','.','W','W','W','W','W','D','W'},
+        {'W','.','W','.','W','#','W','.','W','.','.','.','W','D','W'},
+        {'W','.','W','.','.','.','.','.','W','.','W','.','W','.','W'},
+        {'W','.','W','W','W','W','W','.','W','.','W','.','W','.','W'},
+        {'W','.','.','.','.','.','W','.','W','.','W','.','.','.','W'},
+        {'W','W','W','W','W','.','W','.','W','.','W','W','W','W','W'},
+        {'W','.','.','.','W','.','.','.','.','.','W','.','.','.','W'},
+        {'W','.','W','.','W','W','W','O','W','W','W','.','W','.','W'},
+        {'W','.','W','.','.','.','.','.','.','.','.','.','W','.','W'},
+        {'W','.','W','W','W','W','W','.','W','W','W','W','W','.','W'},
+        {'W','@','.','.','.','.','W','.','W','.','.','.','.','.','W'},
+        {'W','W','W','W','W','W','W','.','W','W','W','W','W','W','W'},
+        {'W','W','W','W','W','W','W','W','W','W','W','W','W','W','W'}
+    };
+
+    while (1) {
+        system("cls");
+
+        // Mecânica do botão e controle dos espinhos
+        if (monstroVivo && monstro.pos.x == 9 && monstro.pos.y == 7) {
+            for(i = 0; i < 3; i++) {
+                mapa[espinhosRef[i].x][espinhosRef[i].y] = '.';
+            }
+        } else {
+            for(i = 0; i < 3; i++) {
+                mapa[espinhosRef[i].x][espinhosRef[i].y] = '#';
+            }
+        }
+
+        char caractereOriginal = mapa[x][y];
+        char caractereMonstro = mapa[monstro.pos.x][monstro.pos.y];
+
+        if (monstroVivo) {
+            mapa[monstro.pos.x][monstro.pos.y] = 'X';
+        }
+        mapa[x][y] = simbolo;
+
+        printf("              --- MASMORRA 2 ---\n\n");
+        printf("Vidas: %d | Arma: %s | Chaves: %d/2 | Use WASD | O Ataca | M Sair\n\n",
+               vidas, nomeArma, chavesColetadas);
+
+        for (i = 0; i < MAP_SIZE_2; i++) {
+            for (j = 0; j < MAP_SIZE_2; j++) {
+                printf("%c ", mapa[i][j]);
+            }
+            printf("\n");
+        }
+
+        mapa[x][y] = caractereOriginal;
+        if (monstroVivo) {
+            mapa[monstro.pos.x][monstro.pos.y] = caractereMonstro;
+        }
+
+        tecla = getch();
+
+        if (tecla == 'm' || tecla == 'M') {
+            break;
+        }
+
+        // Sistema de Combate
+        if (tecla == 'o' || tecla == 'O') {
+            if (jaPegouArma == 0) {
+                printf("\n[AVISO]: Voce nao tem uma arma equipada para atacar!\n");
+                printf("Pressione qualquer tecla para continuar...");
+                getch();
+                continue;
+            }
+
+            int alvoX = x;
+            int alvoY = y;
+            if (simbolo == '^') {
+                alvoX--;
+            }
+            else if (simbolo == 'v') {
+                alvoX++;
+            }
+            else if (simbolo == '<') {
+                alvoY--;
+            }
+            else if (simbolo == '>') {
+                alvoY++;
+            }
+
+            if (monstroVivo && alvoX == monstro.pos.x && alvoY == monstro.pos.y) {
+                monstroVivo = false;
+                printf("\nVoce derrotou o Monstro Tipo 1!\n");
+            } else {
+                printf("\nVoce atacou, mas nao acertou nada.\n");
+            }
+            printf("Pressione qualquer tecla para continuar...");
+            getch();
+            continue;
+        }
+
+        proxX = x;
+        proxY = y;
+
+        // Registro de movimentação conforme código original
+        if (tecla == 'w' || tecla == 'W') { 
+            proxX--; 
+            simbolo = '^'; 
+        }
+        else if (tecla == 's' || tecla == 'S') { 
+            proxX++; 
+            simbolo = 'v'; 
+        }
+        else if (tecla == 'a' || tecla == 'A') { 
+            proxY--; 
+            simbolo = '<'; 
+        }
+        else if (tecla == 'd' || tecla == 'D') { 
+            proxY++; 
+            simbolo = '>'; 
+        }
+
+        if (mapa[proxX][proxY] == 'W' || mapa[proxX][proxY] == '*') {
+            continue;
+        }
+
+        // Validação de Dano por Espinho
+        if (mapa[proxX][proxY] == '#') {
+            vidas--;
+            printf("\n! Voce pisou em espinhos e perdeu 1 vida !\n");
+            if (vidas <= 0) {
+                printf("\nXXX VOCE MORREU NA MASMORRA XXX\n");
+                printf("Pressione qualquer tecla para sair...");
+                getch();
+                break;
+            }
+            printf("Pressione qualquer tecla para continuar...");
+            getch();
+            continue;
+        }
+
+        // Validação de Itens e Portas
+        if (mapa[proxX][proxY] == '@') {
+            chavesColetadas++;
+            mapa[proxX][proxY] = '.';
+            printf("\n* Voce pegou uma chave! (%d/2) *\n", chavesColetadas);
+            printf("Pressione qualquer tecla para continuar...");
+            getch();
+        }
+
+        if (mapa[proxX][proxY] == 'D') {
+            if (chavesColetadas > 0) {
+                chavesColetadas--;
+                mapa[proxX][proxY] = '.';
+                printf("[ Porta aberta com sucesso ]\n");
+            } else {
+                printf("X Porta trancada. Voce precisa de uma chave X\n");
+                printf("Pressione qualquer tecla para continuar...");
+                getch();
+                continue;
+            }
+        }
+
+        // Condição de saída para fim do jogo
+        if (mapa[proxX][proxY] == 'L') {
+            printf("\n## PARABENS! Voce concluiu os desafios de Neogenese! ##\n");
+            printf("Pressione qualquer tecla para fechar...");
+            getch();
+            break;
+        }
+
+        x = proxX;
+        y = proxY;
+
+        // Processamento do turno do Monstro Tipo 1
+        if (monstroVivo) {
+            PositionM2 jogadorPos = {x, y};
+            moverMonstroMasmorra2(&monstro, jogadorPos, mapa);
+
+            if (monstro.pos.x == x && monstro.pos.y == y) {
+                vidas--;
+                printf("\n! O Monstro te alcancou e voce perdeu 1 vida !\n");
+                if (vidas <= 0) {
+                    printf("\nXXX VOCE MORREU NA MASMORRA XXX\n");
+                    printf("Pressione qualquer tecla para sair...");
+                    getch();
+                    break;
+                }
+                printf("Pressione qualquer tecla para continuar...");
+                getch();
+            }
+        }
+    }
+}
+
+/* Algoritmo de Inteligência Artificial do Monstro Tipo 1 */
+void moverMonstroMasmorra2(MonsterM2 *m, PositionM2 playerPos, char mapa[MAP_SIZE_2][MAP_SIZE_2]) {
+    PositionM2 nextM = m->pos;
+    int dx = abs(playerPos.x - m->pos.x);
+    int dy = abs(playerPos.y - m->pos.y);
+
+    if (dx >= dy && m->pos.x != playerPos.x) {
+        nextM.x += (playerPos.x > m->pos.x) ? 1 : -1;
+    } else if (m->pos.y != playerPos.y) {
+        nextM.y += (playerPos.y > m->pos.y) ? 1 : -1;
+    }
+
+    if (mapa[nextM.x][nextM.y] != 'W' && mapa[nextM.x][nextM.y] != 'D' && mapa[nextM.x][nextM.y] != '*') {
+        m->pos = nextM;
+    }
