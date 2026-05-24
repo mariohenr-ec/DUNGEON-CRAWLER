@@ -9,7 +9,7 @@ void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
-void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funções by mario, masmorra2 e monstro*/
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃ§oes by mario, masmorra2 e monstro*/
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
 
 /* === FUNCAO PRINCIPAL === */
@@ -211,7 +211,7 @@ void iniciarVila() {
     }
 }
 
-/* === FUNCAO DA MASMORRA 1 === acrescentado mais detalhes da movimentação para n entrar na masmorra sem arma*/
+/* === FUNCAO DA MASMORRA 1 === acrescentado mais detalhes da movimenta??o para n entrar na masmorra sem arma*/
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma) {
     char tecla;
     int x = 1, y = 1;
@@ -443,16 +443,16 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     char mapa[15][16] = {
         "***************",
         "* *  *L*    k *",
-        "* *  KKK    k *",
-        "* *           *",
-        "*   K#    k#  *",
+        "* *  *D*    k *",
+        "* *#          *",
+        "*   ##    k#  *",
+        "*    #        *",
+        "* k*********  *",
         "*             *",
-        "* **********  *",
-        "*             *",
-        "* * ##  **D****",
+        "* * ##  **k****",
         "*       *   * *",
         "*       * O * *",
-        "*X*@    *   *@*",
+        "*X*     *   *@*",
         "*X      *   * *",
         "***************",
         "***************"
@@ -601,7 +601,8 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
         if (mapa[proxX][proxY] == 'O') {
             mapa[proxX][proxY] = ' ';
-
+			
+			
             /* Paredes  da imagem: removidas somente neste mapa 15x15 */
             mapa[8][8] = ' ';
             mapa[8][9] = ' ';
