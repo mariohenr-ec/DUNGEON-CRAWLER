@@ -1,4 +1,4 @@
-# 🏰 [NOME DO JOGO AQUI]
+# 🏰 [NEOGÊNESE]
 
 > Um emocionante jogo de exploração de masmorras (Dungeon Crawler) desenvolvido inteiramente em C para o console.
 
