@@ -11,7 +11,7 @@ void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funçoes by mario, masmorra2 e monstro*/
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
-void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores */
+void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores - J */
 
 /* === FUNCAO PRINCIPAL === */
 int main() {
@@ -80,6 +80,12 @@ void imprimirCaractereColorido(char c) {
         case 'L': // Escada - Branca
             printf("\033[97m%c \033[0m", c);
             break;
+       case 'k': case 'K': // Caixas - laranja terroso
+            printf("\033[38;5;130m%c \033[0m", c); 
+            break;
+        case '@': // Chave - amarelo claro
+   	   	    printf("\033[93m%c \033[0m", c); 
+   	   	   	    break;
         default: // Outros elementos (monstros, chaves, caixas, espaco vazio) permanecem com a cor padrao
             printf("%c ", c);
             break;
