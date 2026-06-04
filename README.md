@@ -1,5 +1,5 @@
 # 🏰 NEOGÊNESE
-
+![Concluído](https://img.shields.io/badge/Status-Concluído-brightgreen)
 > Um emocionante jogo de exploração de masmorras (Dungeon Crawler) desenvolvido inteiramente em C para o console.
 
 ---
