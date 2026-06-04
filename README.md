@@ -43,7 +43,7 @@ derrotar o **Boss Final (Z)** para vencer a aventura.
 * `D` : **Porta Fechada** (bloqueia o caminho).
 * `=` : **Porta Aberta** (caminho livre).
 * `L` : **Escada** (avança para o próximo andar).
-* `O` : **Botão** (ativa mecanismos no mapa).
+* `O` : **Botão** (ativa mecanismo de destruição de paredes no mapa).
 
 ### Perigos e Obstáculos
 * `*` : **Parede** (intransponível).
