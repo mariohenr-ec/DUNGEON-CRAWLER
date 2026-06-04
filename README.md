@@ -76,12 +76,13 @@ Ao iniciar na Vila, você deve escolher uma das três armas com o NPC:
 </p>
 
 
-# O uso foi voltado principalmente para:
+### O uso foi voltado principalmente para:
 - Esclarecimento de como a lógica de movimentação do jogador, interação com npc, interações na matriz dos mapas no geral.
 - Correção de bugs nos códigos como: caixas sumindo ao passar por cima, portas abrindo sem chaves e entrar no mapa sem armas.
 - Aprendizado de como atribuir cores em C nos elementos das matrizes.
 - Aprendizado de como desenvolver a lógica de movimentação dos monstros.
-# Boas práticas de Desenvolvimento com IAs (STD) utilizadas:
+  
+### Boas práticas de Desenvolvimento com IAs (STD) utilizadas:
 - Arquivos de spec.md foram amplamente utilizados para minimizar os erros das IAs e para definir as especificações da modificação requisidada.
 
 ---
