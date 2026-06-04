@@ -66,11 +66,17 @@ Ao iniciar na Vila, você deve escolher uma das três armas com o NPC:
 ---
 
 ## 🤖 Declaração de Uso de IA Generativa
-* ESCREVER AQUI *
 
-**Uso de IA:** [Sim/Não]
-**Ferramenta:** [escrever aqui]
-**Objetivo:** [escrever aqui]
+**Uso de IA:** https://img.shields.io/badge/Uso%20de%20IA-Sim-brightgreen
+
+### IAs Utilizadas
+<p align="left">
+  <img src="https://www.vectorlogo.zone/logos/google_gemini/google_gemini-icon.svg" alt="Google Gemini" width="45" height="45" style="margin-right: 15px; vertical-align: middle;"/>
+  <img src="https://www.vectorlogo.zone/logos/openai/openai-icon.svg" alt="ChatGPT" width="45" height="45" style="vertical-align: middle;"/>
+</p>
+
+**Ferramenta:** Google Gemini e ChatGPT  
+**Objetivo:** [escrever aqui]  
 
 ---
 *Projeto desenvolvido para a disciplina de Programação - 2026.*
