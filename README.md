@@ -71,8 +71,8 @@ Ao iniciar na Vila, você deve escolher uma das três armas com o NPC:
 
 ### IAs Utilizadas
 <p align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google Gemini" width="40" height="40" style="margin-right: 15px;"/>
-  <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/main/icons/openai.png" alt="ChatGPT" width="40" height="40"/>
+  <img src="./assets/Gemini-logo(1).png" alt="Google Gemini" width="40" height="40" style="margin-right: 15px; vertical-align: middle;"/>
+  <img src="./assets/images.png" alt="ChatGPT" width="40" height="40" style="vertical-align: middle;"/>
 </p>
 
 **Ferramenta:** Google Gemini e ChatGPT  
