@@ -67,15 +67,22 @@ Ao iniciar na Vila, você deve escolher uma das três armas com o NPC:
 
 ## 🤖 Declaração de Uso de IA Generativa
 
-**Uso de IA:** ![Sim](https://img.shields.io/badge/Uso%20de%20IA-Sim-brightgreen)
+![Sim](https://img.shields.io/badge/Uso%20de%20IA-Sim-brightgreen)
 
-### IAs Utilizadas
+### IAs Utilizadas: Gemini e Chat GPT
 <p align="left">
   <img src="./images/Gemini-logo.png" alt="Google Gemini" width="40" height="40" style="margin-right: 15px; vertical-align: middle;"/>
   <img src="./images/images.png" alt="ChatGPT" width="40" height="40" style="vertical-align: middle;"/>
 </p>
 
-**Ferramenta:** Google Gemini e ChatGPT  
-**Objetivo:** [escrever aqui]
+
+# O uso foi voltado principalmente para:
+- Esclarecimento de como a lógica de movimentação do jogador, interação com npc, interações na matriz dos mapas no geral.
+- Correção de bugs nos códigos como: caixas sumindo ao passar por cima, portas abrindo sem chaves e entrar no mapa sem armas.
+- Aprendizado de como atribuir cores em C nos elementos das matrizes.
+- Aprendizado de como desenvolver a lógica de movimentação dos monstros.
+# Boas práticas de Desenvolvimento com IAs (STD) utilizadas:
+- Arquivos de spec.md foram amplamente utilizados para minimizar os erros das IAs e para definir as especificações da modificação requisidada.
+
 ---
 *Projeto desenvolvido para a disciplina de Programação - 2026.*
