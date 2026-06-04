@@ -9,7 +9,7 @@ void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
-void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃƒÂ§oes by mario, masmorra2 e monstro*/
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃ§oes by mario, masmorra2 e monstro*/
 void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
@@ -20,6 +20,7 @@ void criarNovoY(char mapa[15][19], int zX, int zY, int *yX, int *yY);
 void criarMonstroXAleatorio(char mapa[15][19], int xMonstros[], int yMonstros[], int *qtdX);
 void moverMonstrosX3(char mapa[15][19], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY);
 void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores - J */
+void exibirGameOver(); /* Nova funcao adicionada */
 
 /* === FUNCAO PRINCIPAL === */
 int main() {
@@ -78,9 +79,10 @@ void imprimirCaractereColorido(char c) {
         case '#': // Espinhos - Verde Escuro
             printf("\033[32m%c \033[0m", c);
             break;
-        case 'D': // Porta Fechada - Marrom
-        case '=': // Porta Aberta - Marrom
-            printf("\033[33m%c \033[0m", c);
+        case 'D': // Porta Fechada - Dourado / Amarelo Ouro
+        case '=': // Porta Aberta - Dourado / Amarelo Ouro
+        case '@': // Chave - Dourado / Amarelo Ouro
+            printf("\033[93m%c \033[0m", c);
             break;
         case '^': case 'v': case '<': case '>': // Jogador - Azul
             printf("\033[94m%c \033[0m", c);
@@ -88,28 +90,46 @@ void imprimirCaractereColorido(char c) {
         case 'L': // Escada - Branca
             printf("\033[97m%c \033[0m", c);
             break;
-       case 'k': case 'K': // Caixas - laranja terroso
+        case 'k': case 'K': // Caixas - Laranja terroso / Marrom
             printf("\033[38;5;130m%c \033[0m", c); 
             break;
-        case '@': // Chave - amarelo claro
-   	   	    printf("\033[93m%c \033[0m", c); 
-   	   	   	    break;
         case 'O': // Botao
             printf("\033[95m%c \033[0m", c);
             break;
-        case 'Q': // NPC do corredor final
+        case 'Q': // NPC do corredor final - Ciano Brilhante
+        case 'F': // Ferreiro - Ciano Brilhante
             printf("\033[96m%c \033[0m", c);
             break;
-        case 'Y': // Monstro Y
+        case 'X': // Monstro X - Amarelo Claro
+            printf("\033[93m%c \033[0m", c);
+            break;
+        case 'Y': // Monstro Y - Laranja
+            printf("\033[38;5;208m%c \033[0m", c);
+            break;
+        case 'Z': // Boss Z - Vermelho Vivo
             printf("\033[91m%c \033[0m", c);
             break;
-        case 'Z': // Boss Z
-            printf("\033[31m%c \033[0m", c);
-            break;
-        default: // Outros elementos (monstros, chaves, caixas, espaco vazio) permanecem com a cor padrao
+        default: // Outros elementos e espaco vazio
             printf("%c ", c);
             break;
     }
+}
+
+/* === FUNCAO DE GAME OVER === */
+void exibirGameOver() {
+    system("cls");
+    printf("\033[91m");
+    printf("        ######      ###    ##     ## ########     #######  ##     ## ######## ########  \n");
+    printf("       ##    ##    ## ##   ###   ### ##          ##     ## ##     ## ##       ##     ## \n");
+    printf("       ##         ##   ##  #### #### ##          ##     ## ##     ## ##       ##     ## \n");
+    printf("       ##   #### ##     ## ## ### ## ######      ##     ## ##     ## ######   ########  \n");
+    printf("       ##    ##  ######### ##     ## ##          ##     ##  ##   ##  ##       ##   ##   \n");
+    printf("       ##    ##  ##     ## ##     ## ##          ##     ##   ## ###   ##       ##    ##  \n");
+    printf("        ######   ##     ## ##     ## ########     #######     ###     ######## ##     ## \n");
+    printf("\033[0m");
+    printf("\n\n");
+    printf("                     Pressione qualquer tecla para voltar ao menu inicial...");
+    getch();
 }
 
 /* === FUNCAO DA VILA === */
@@ -127,11 +147,12 @@ void iniciarVila() {
     strcpy(nomeArma, "Nenhuma");
     int jaPegouArma = 0;
 
-    char mapa[10][11] = {
+    
+     char mapa[10][11] = {
         "**********",
         "*        *",
         "**       *",
-        "*N       *",
+        "*F       *",
         "**       *",
         "*        *",
         "*   * *  *",
@@ -199,11 +220,11 @@ void iniciarVila() {
             continue;
         }
 
-        if (mapa[proxX][proxY] == 'N') {
+        if (mapa[proxX][proxY] == 'F') {
             if (jaPegouArma == 1) {
-                printf("\n[NPC]: Voce ja escolheu seu equipamento, heroi!\n");
+                printf("\n[Ferreiro]: Voce ja escolheu seu equipamento, heroi!\n");
             } else {
-                printf("\n[NPC]: Ola heroi! Escolha sua arma:\n");
+                printf("\n[Ferreiro]: Ola heroi! Escolha sua arma:\n");
                 printf("1 - Espada\n");
                 printf("2 - Cajado\n");
                 printf("3 - Arco e Flecha\n");
@@ -247,7 +268,7 @@ void iniciarVila() {
 
         if (mapa[proxX][proxY] == 'L') {
             if (jaPegouArma == 0) {
-                printf("\n[BLOQUEADO]: Voce precisa pegar uma arma com o NPC antes de entrar na masmorra!\n");
+                printf("\n[BLOQUEADO]: Voce precisa pegar uma arma com o Ferreiro antes de entrar na masmorra!\n");
                 printf("Pressione qualquer tecla para continuar...");
                 getch();
                 continue;
@@ -264,7 +285,7 @@ void iniciarVila() {
     }
 }
 
-/* === FUNCAO DA MASMORRA 1 === acrescentado mais detalhes da movimenta??o para n entrar na masmorra sem arma*/
+/* === FUNCAO DA MASMORRA 1 === */
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma) {
     char tecla;
     int x = 1, y = 1;
@@ -274,6 +295,7 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
     int temChave = 0;
 
+    
     char mapa[10][11] = {
         "**********",
         "*   k*  L*",
@@ -371,9 +393,7 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             printf("\nVoce pisou em espinhos e perdeu uma vida!\n");
 
             if (vidas <= 0) {
-                printf("Voce morreu na Masmorra 1!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...");
-                getch();
+                exibirGameOver();
                 break;
             }
 
@@ -427,9 +447,7 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             printf("\nUm monstro te atacou! Voce perdeu uma vida.\n");
 
             if (vidas <= 0) {
-                printf("Voce morreu na Masmorra 1!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...");
-                getch();
+                exibirGameOver();
                 break;
             }
 
@@ -455,7 +473,7 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     }
 }
 
-/* === MOVE O MONSTRO X DA MASMORRA 2 === feito by M*/
+/* === MOVE O MONSTRO X DA MASMORRA 2 === */
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY) {
     int direcao = rand() % 4;
     int novoX = *monstroX;
@@ -478,7 +496,7 @@ void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX
     }
 }
 
-/* === FUNCAO DA MASMORRA 2 === feito by M*/
+/* === FUNCAO DA MASMORRA 2 === */
 void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma) {
     char tecla;
     int x = 1, y = 1;
@@ -493,6 +511,7 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     int monstro2Y = 1;
     
 
+    /* MAPA ORIGINAL RESTAURADO */
     char mapa[15][16] = {
         "***************",
         "* *  *L*    k *",
@@ -613,9 +632,7 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             printf("\nVoce pisou em espinhos e perdeu uma vida!\n");
 
             if (vidas <= 0) {
-                printf("Voce morreu na Masmorra 2!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...");
-                getch();
+                exibirGameOver();
                 break;
             }
 
@@ -680,9 +697,7 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             printf("\nO monstro X te atacou! Voce perdeu uma vida.\n");
 
             if (vidas <= 0) {
-                printf("Voce morreu na Masmorra 2!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...");
-                getch();
+                exibirGameOver();
                 break;
             }
 
@@ -723,9 +738,7 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             printf("\nUm monstro X chegou perto e te atacou! Voce perdeu uma vida.\n");
 
             if (vidas <= 0) {
-                printf("Voce morreu na Masmorra 2!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...");
-                getch();
+                exibirGameOver();
                 break;
             }
 
@@ -889,6 +902,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     int yMonstros[50];
     int qtdX = 0;
 
+    
     char mapa[15][19] = {
         "******************",
         "*Y*  *     *   * *",
@@ -980,6 +994,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
             if (tecla == 'w' || tecla == 'W') {
                 proxX--;
+                simbolo = '^';
                 simbolo = '^';
             }
             else if (tecla == 's' || tecla == 'S') {
@@ -1084,9 +1099,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 vidas--;
                 printf("\nO monstro Y te atacou! Voce perdeu uma vida.\n");
                 if (vidas <= 0) {
-                    printf("Voce morreu na Masmorra 3!\n");
-                    printf("Pressione qualquer tecla para voltar ao menu...");
-                    getch();
+                    exibirGameOver();
                     break;
                 }
                 printf("Pressione qualquer tecla para continuar...");
@@ -1098,9 +1111,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 vidas--;
                 printf("\nO monstro X te atacou! Voce perdeu uma vida.\n");
                 if (vidas <= 0) {
-                    printf("Voce morreu na Masmorra 3!\n");
-                    printf("Pressione qualquer tecla para voltar ao menu...");
-                    getch();
+                    exibirGameOver();
                     break;
                 }
                 printf("Pressione qualquer tecla para continuar...");
@@ -1112,9 +1123,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 vidas--;
                 printf("\nO Boss Z te atingiu! Voce perdeu uma vida.\n");
                 if (vidas <= 0) {
-                    printf("Voce morreu na Masmorra 3!\n");
-                    printf("Pressione qualquer tecla para voltar ao menu...");
-                    getch();
+                    exibirGameOver();
                     break;
                 }
                 printf("Pressione qualquer tecla para continuar...");
@@ -1149,9 +1158,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             printf("\nO monstro Y chegou perto e te atacou! Voce perdeu uma vida.\n");
 
             if (vidas <= 0) {
-                printf("Voce morreu na Masmorra 3!\n");
-                printf("Pressione qualquer tecla para voltar ao menu...");
-                getch();
+                exibirGameOver();
                 break;
             }
             printf("Pressione qualquer tecla para continuar...");
@@ -1164,9 +1171,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 printf("\nUm monstro X chegou perto e te atacou! Voce perdeu uma vida.\n");
 
                 if (vidas <= 0) {
-                    printf("Voce morreu na Masmorra 3!\n");
-                    printf("Pressione qualquer tecla para voltar ao menu...");
-                    getch();
+                    exibirGameOver();
                     break;
                 }
                 printf("Pressione qualquer tecla para continuar...");
@@ -1176,6 +1181,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
         }
 
         if (vidas <= 0) {
+            exibirGameOver();
             break;
         }
 
@@ -1191,7 +1197,8 @@ void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPeg
     char simbolo = '>';
     int conversouQ = 0;
 
-    char mapa[25][27] = {
+    
+   char mapa[25][27] = {
         "**************************",
         "**************************",
         "**************************",
@@ -1315,7 +1322,7 @@ void exibirTutorial() {
 
     printf(" - Use as teclas W, A, S, D para andar.\n");
     printf(" - Use a tecla O para atacar.\n");
-    printf(" - Encontre o NPC 'N' para conseguir uma arma.\n");
+    printf(" - Encontre o Ferreiro 'F' para conseguir uma arma.\n");
     printf(" - Va ate a saida 'L' para progredir.\n\n");
 
     printf("--------------------------------------------\n");
