@@ -9,7 +9,7 @@ void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
-void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃ§oes by mario, masmorra2 e monstro*/
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funçoes‚Â§oes by mario, masmorra2 e monstro*/
 void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
@@ -21,6 +21,8 @@ void criarMonstroXAleatorio(char mapa[15][19], int xMonstros[], int yMonstros[],
 void moverMonstrosX3(char mapa[15][19], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY);
 void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores - J */
 void exibirGameOver(); /* Nova funcao adicionada */
+void exibirFinalJogo(); /* Tela final narrativa */
+int estaNaAreaAtaque(int jogadorX, int jogadorY, char simbolo, char nomeArma[], int alvoX, int alvoY);
 
 /* === FUNCAO PRINCIPAL === */
 int main() {
@@ -130,6 +132,41 @@ void exibirGameOver() {
     printf("\n\n");
     printf("                     Pressione qualquer tecla para voltar ao menu inicial...");
     getch();
+}
+
+
+/* === VERIFICA A AREA DE ATAQUE DE CADA ARMA === */
+int estaNaAreaAtaque(int jogadorX, int jogadorY, char simbolo, char nomeArma[], int alvoX, int alvoY) {
+    int dx = alvoX - jogadorX;
+    int dy = alvoY - jogadorY;
+    int dist;
+
+    /* Cajado: atinge 1 celula ao redor do jogador, sem depender da direcao. */
+    if (strcmp(nomeArma, "Cajado") == 0) {
+        if (dx >= -1 && dx <= 1 && dy >= -1 && dy <= 1 && !(dx == 0 && dy == 0)) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /* Arco e Flecha: atinge ate 4 celulas na frente da visao do jogador. */
+    if (strcmp(nomeArma, "Arco e Flecha") == 0) {
+        for (dist = 1; dist <= 4; dist++) {
+            if (simbolo == '^' && alvoX == jogadorX - dist && alvoY == jogadorY) return 1;
+            if (simbolo == 'v' && alvoX == jogadorX + dist && alvoY == jogadorY) return 1;
+            if (simbolo == '<' && alvoX == jogadorX && alvoY == jogadorY - dist) return 1;
+            if (simbolo == '>' && alvoX == jogadorX && alvoY == jogadorY + dist) return 1;
+        }
+        return 0;
+    }
+
+    /* Espada: mantem o ataque de 1 celula na frente. */
+    if (simbolo == '^' && alvoX == jogadorX - 1 && alvoY == jogadorY) return 1;
+    if (simbolo == 'v' && alvoX == jogadorX + 1 && alvoY == jogadorY) return 1;
+    if (simbolo == '<' && alvoX == jogadorX && alvoY == jogadorY - 1) return 1;
+    if (simbolo == '>' && alvoX == jogadorX && alvoY == jogadorY + 1) return 1;
+
+    return 0;
 }
 
 /* === FUNCAO DA VILA === */
@@ -245,13 +282,13 @@ void iniciarVila() {
                         break;
                     case 2:
                         strcpy(nomeArma, "Cajado");
-                        alcanceArma = 3;
+                        alcanceArma = 1;
                         jaPegouArma = 1;
                         printf("\nVoce equipou o Cajado!\n");
                         break;
                     case 3:
                         strcpy(nomeArma, "Arco e Flecha");
-                        alcanceArma = 5;
+                        alcanceArma = 4;
                         jaPegouArma = 1;
                         printf("\nVoce equipou o Arco e Flecha!\n");
                         break;
@@ -335,19 +372,28 @@ void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
         }
 
         if (tecla == 'o' || tecla == 'O') {
-            int alvoX = x;
-            int alvoY = y;
+            int alvoX = -1;
+            int alvoY = -1;
+            int linha, coluna;
 
-            if (simbolo == '^') alvoX--;
-            else if (simbolo == 'v') alvoX++;
-            else if (simbolo == '<') alvoY--;
-            else if (simbolo == '>') alvoY++;
+            for (linha = 0; linha < 10; linha++) {
+                for (coluna = 0; coluna < 10; coluna++) {
+                    if ((mapa[linha][coluna] == 'k' || mapa[linha][coluna] == 'K' ||
+                         mapa[linha][coluna] == 'X' || mapa[linha][coluna] == 'Y') &&
+                        estaNaAreaAtaque(x, y, simbolo, nomeArma, linha, coluna)) {
+                        alvoX = linha;
+                        alvoY = coluna;
+                        break;
+                    }
+                }
+                if (alvoX != -1) break;
+            }
 
-            if (mapa[alvoX][alvoY] == 'k') {
+            if (alvoX != -1 && (mapa[alvoX][alvoY] == 'k' || mapa[alvoX][alvoY] == 'K')) {
                 mapa[alvoX][alvoY] = ' ';
                 printf("\nVoce destruiu uma caixa!\n");
             }
-            else if (mapa[alvoX][alvoY] == 'X' || mapa[alvoX][alvoY] == 'Y') {
+            else if (alvoX != -1 && (mapa[alvoX][alvoY] == 'X' || mapa[alvoX][alvoY] == 'Y')) {
                 mapa[alvoX][alvoY] = ' ';
                 printf("\nVoce derrotou um monstro!\n");
             }
@@ -556,19 +602,27 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
         }
 
         if (tecla == 'o' || tecla == 'O') {
-            int alvoX = x;
-            int alvoY = y;
+            int alvoX = -1;
+            int alvoY = -1;
+            int linha, coluna;
 
-            if (simbolo == '^') alvoX--;
-            else if (simbolo == 'v') alvoX++;
-            else if (simbolo == '<') alvoY--;
-            else if (simbolo == '>') alvoY++;
+            for (linha = 0; linha < 15; linha++) {
+                for (coluna = 0; coluna < 15; coluna++) {
+                    if ((mapa[linha][coluna] == 'k' || mapa[linha][coluna] == 'K' || mapa[linha][coluna] == 'X') &&
+                        estaNaAreaAtaque(x, y, simbolo, nomeArma, linha, coluna)) {
+                        alvoX = linha;
+                        alvoY = coluna;
+                        break;
+                    }
+                }
+                if (alvoX != -1) break;
+            }
 
-            if (mapa[alvoX][alvoY] == 'k' || mapa[alvoX][alvoY] == 'K') {
+            if (alvoX != -1 && (mapa[alvoX][alvoY] == 'k' || mapa[alvoX][alvoY] == 'K')) {
                 mapa[alvoX][alvoY] = ' ';
                 printf("\nVoce destruiu uma caixa!\n");
             }
-            else if (mapa[alvoX][alvoY] == 'X') {
+            else if (alvoX != -1 && mapa[alvoX][alvoY] == 'X') {
                 mapa[alvoX][alvoY] = ' ';
 
                 if (alvoX == monstro1X && alvoY == monstro1Y) {
@@ -949,15 +1003,23 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
         }
 
         if (tecla == 'o' || tecla == 'O') {
-            int alvoX = x;
-            int alvoY = y;
+            int alvoX = -1;
+            int alvoY = -1;
+            int linha, coluna;
 
-            if (simbolo == '^') alvoX--;
-            else if (simbolo == 'v') alvoX++;
-            else if (simbolo == '<') alvoY--;
-            else if (simbolo == '>') alvoY++;
+            for (linha = 0; linha < 15; linha++) {
+                for (coluna = 0; coluna < 18; coluna++) {
+                    if ((mapa[linha][coluna] == 'X' || mapa[linha][coluna] == 'Y' || mapa[linha][coluna] == 'Z') &&
+                        estaNaAreaAtaque(x, y, simbolo, nomeArma, linha, coluna)) {
+                        alvoX = linha;
+                        alvoY = coluna;
+                        break;
+                    }
+                }
+                if (alvoX != -1) break;
+            }
 
-            if (mapa[alvoX][alvoY] == 'Y') {
+            if (alvoX != -1 && mapa[alvoX][alvoY] == 'Y') {
                 mapa[alvoX][alvoY] = ' ';
                 monstroYX = -1;
                 monstroYY = -1;
@@ -965,7 +1027,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 printf("Z invocou um novo Y!\n");
                 criarNovoY(mapa, bossZX, bossZY, &monstroYX, &monstroYY);
             }
-            else if (mapa[alvoX][alvoY] == 'X') {
+            else if (alvoX != -1 && mapa[alvoX][alvoY] == 'X') {
                 int k;
                 mapa[alvoX][alvoY] = ' ';
 
@@ -978,7 +1040,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
                 printf("\nVoce destruiu o monstro X!\n");
             }
-            else if (mapa[alvoX][alvoY] == 'Z') {
+            else if (alvoX != -1 && mapa[alvoX][alvoY] == 'Z') {
                 printf("\nVoce atacou o Boss Z, mas ele resistiu!\n");
             }
             else {
@@ -994,7 +1056,6 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
             if (tecla == 'w' || tecla == 'W') {
                 proxX--;
-                simbolo = '^';
                 simbolo = '^';
             }
             else if (tecla == 's' || tecla == 'S') {
@@ -1278,10 +1339,7 @@ void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPeg
         }
 
         if (mapa[proxX][proxY] == 'Q') {
-            printf("\n[Q]: Voce chegou ate o fim do corredor...\n");
-            printf("[Q]: O restante da conversa sera continuado depois.\n");
-            printf("Pressione qualquer tecla para continuar...");
-            getch();
+            exibirFinalJogo();
             conversouQ = 1;
             break;
         }
@@ -1291,6 +1349,58 @@ void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPeg
 
         if (conversouQ == 1) {
             break;
+        }
+    }
+}
+
+
+/* === TELA FINAL DO JOGO === */
+void exibirFinalJogo() {
+    int opcao;
+
+    while (1) {
+        system("cls");
+
+        printf("\033[96m");
+        printf("============================================================\n");
+        printf("                    FIM DO CAPITULO 1                      \n");
+        printf("============================================================\n");
+        printf("\033[0m\n");
+
+        printf("Q = Obrigado por me salvar.\n\n");
+        printf("V = Quem e voce? Onde estao os outros?\n");
+        printf("O Z morreu?\n\n");
+        printf("Q = Z os trancafiou e os levou para uma outra vila proxima,\n");
+        printf("sou o unico que restou de la.\n\n");
+        printf("V = Irei atras dele e resgatarei todos, custe o que custar....\n\n");
+
+        printf("Com a surpreendente fuga de Z, nosso heroi precisara persegui-lo\n");
+        printf("e devera descobrir o que mais pode estar acontecendo e em meio\n");
+        printf("a tantas incertezas, a unica coisa certa e que ele nao ira parar\n");
+        printf("ate que reencontre seus companheiros, onde estiverem....\n\n");
+
+        printf("FIM, por enquanto...\n\n");
+
+        printf("============================================================\n");
+        printf("1 - SAIR\n");
+        printf("2 - MENU\n");
+        printf("============================================================\n\n");
+        printf("Escolha: ");
+
+        if (scanf("%d", &opcao) != 1) {
+            while (getchar() != '\n');
+            continue;
+        }
+
+        if (opcao == 1) {
+            exit(0);
+        }
+        else if (opcao == 2) {
+            return;
+        }
+        else {
+            printf("\nOpcao invalida! Pressione qualquer tecla para tentar novamente...");
+            getch();
         }
     }
 }
