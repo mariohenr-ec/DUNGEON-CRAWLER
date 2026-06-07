@@ -9,7 +9,7 @@ void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
-void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funçoes‚Â§oes by mario, masmorra2 e monstro*/
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃ§oesâ€šÃ‚Â§oes by mario, masmorra2 e monstro*/
 void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
@@ -160,11 +160,42 @@ int estaNaAreaAtaque(int jogadorX, int jogadorY, char simbolo, char nomeArma[], 
         return 0;
     }
 
-    /* Espada: mantem o ataque de 1 celula na frente. */
-    if (simbolo == '^' && alvoX == jogadorX - 1 && alvoY == jogadorY) return 1;
-    if (simbolo == 'v' && alvoX == jogadorX + 1 && alvoY == jogadorY) return 1;
-    if (simbolo == '<' && alvoX == jogadorX && alvoY == jogadorY - 1) return 1;
-    if (simbolo == '>' && alvoX == jogadorX && alvoY == jogadorY + 1) return 1;
+    /* Espada: mantem o ataque de 3x2 celula na frente. */
+    if (strcmp(nomeArma, "Espada") == 0) {
+    /* Direita */
+    if (simbolo == '>' &&
+        alvoX >= jogadorX - 1 &&
+        alvoX <= jogadorX + 1 &&
+        alvoY >= jogadorY + 1 &&
+        alvoY <= jogadorY + 2) {
+        return 1;
+    }
+    /* Esquerda */
+    if (simbolo == '<' &&
+        alvoX >= jogadorX - 1 &&
+        alvoX <= jogadorX + 1 &&
+        alvoY >= jogadorY - 2 &&
+        alvoY <= jogadorY - 1) {
+        return 1;
+    }
+    /* Cima */
+    if (simbolo == '^' &&
+        alvoX >= jogadorX - 2 &&
+        alvoX <= jogadorX - 1 &&
+        alvoY >= jogadorY - 1 &&
+        alvoY <= jogadorY + 1) {
+        return 1;
+    }
+    /* Baixo */
+    if (simbolo == 'v' &&
+        alvoX >= jogadorX + 1 &&
+        alvoX <= jogadorX + 2 &&
+        alvoY >= jogadorY - 1 &&
+        alvoY <= jogadorY + 1) {
+        return 1;
+    }
+    return 0;
+}
 
     return 0;
 }
@@ -202,7 +233,7 @@ void iniciarVila() {
         system("cls");
 
         char caractereOriginal = mapa[x][y];
-        // Coloca o símbolo do jogador na matriz antes de imprimir
+        // Coloca o sÃ­mbolo do jogador na matriz antes de imprimir
         mapa[x][y] = simbolo;
 
         printf("              --- VILA DE NEOGENESE ---\n\n");
@@ -226,13 +257,13 @@ void iniciarVila() {
             break;
         }
 
-		 /* Guarda a posição pretendida */
+		 /* Guarda a posiÃ§Ã£o pretendida */
     	/*aqui usa as variaveis do movimento, sao atualizadas a cada tecla
 				e imprime a nova posicao na matriz */
         proxX = x;
         proxY = y;
 
-		/* == LÓGICA DE MOVIMENTO E DIREÇÃO == */
+		/* == LÃ“GICA DE MOVIMENTO E DIREÃ‡ÃƒO == */
         
         /* OBS: aqui usei um pouco de IA pra aprender essa logica de quando o X ou o Y
         	reduz ou aumenta na matriz */
@@ -330,7 +361,7 @@ void iniciarVila() {
             iniciarMasmorra1(vidas, nomeArma, alcanceArma, jaPegouArma);
             break;
         }
-/* == VERIFICAÇÃO DE COLISÃO E LIMPEZA Do RASTRO == */
+/* == VERIFICAÃ‡ÃƒO DE COLISÃƒO E LIMPEZA Do RASTRO == */
         if (mapa[proxX][proxY] != '*') {
             x = proxX;
             y = proxY;
