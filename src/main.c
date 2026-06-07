@@ -9,16 +9,16 @@ void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
-void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃ§oesâ€šÃ‚Â§oes by mario, masmorra2 e monstro*/
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃƒÂ§oesÃ¢â‚¬Å¡Ãƒâ€šÃ‚Â§oes by mario, masmorra2 e monstro*/
 void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
-void moverMonstroY(char mapa[15][19], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
-void trocarBossZcomY(char mapa[15][19], int *zX, int *zY, int *yX, int *yY);
+void moverMonstroY(char mapa[25][26], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
+void trocarBossZcomY(char mapa[25][26], int *zX, int *zY, int *yX, int *yY);
 int jogadorEstaDeCostasParaZ(int jogadorX, int jogadorY, int zX, int zY, char simbolo);
-void criarNovoY(char mapa[15][19], int zX, int zY, int *yX, int *yY);
-void criarMonstroXAleatorio(char mapa[15][19], int xMonstros[], int yMonstros[], int *qtdX);
-void moverMonstrosX3(char mapa[15][19], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY);
+void criarNovoY(char mapa[25][26], int zX, int zY, int *yX, int *yY);
+void criarMonstroXAleatorio(char mapa[25][26], int xMonstros[], int yMonstros[], int *qtdX);
+void moverMonstrosX3(char mapa[25][26], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY);
 void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores - J */
 void exibirGameOver(); /* Nova funcao adicionada */
 void exibirFinalJogo(); /* Tela final narrativa */
@@ -233,7 +233,7 @@ void iniciarVila() {
         system("cls");
 
         char caractereOriginal = mapa[x][y];
-        // Coloca o sÃ­mbolo do jogador na matriz antes de imprimir
+        // Coloca o sÃƒÂ­mbolo do jogador na matriz antes de imprimir
         mapa[x][y] = simbolo;
 
         printf("              --- VILA DE NEOGENESE ---\n\n");
@@ -257,13 +257,13 @@ void iniciarVila() {
             break;
         }
 
-		 /* Guarda a posiÃ§Ã£o pretendida */
+		 /* Guarda a posiÃƒÂ§ÃƒÂ£o pretendida */
     	/*aqui usa as variaveis do movimento, sao atualizadas a cada tecla
 				e imprime a nova posicao na matriz */
         proxX = x;
         proxY = y;
 
-		/* == LÃ“GICA DE MOVIMENTO E DIREÃ‡ÃƒO == */
+		/* == LÃƒâ€œGICA DE MOVIMENTO E DIREÃƒâ€¡ÃƒÆ’O == */
         
         /* OBS: aqui usei um pouco de IA pra aprender essa logica de quando o X ou o Y
         	reduz ou aumenta na matriz */
@@ -361,7 +361,7 @@ void iniciarVila() {
             iniciarMasmorra1(vidas, nomeArma, alcanceArma, jaPegouArma);
             break;
         }
-/* == VERIFICAÃ‡ÃƒO DE COLISÃƒO E LIMPEZA Do RASTRO == */
+/* == VERIFICAÃƒâ€¡ÃƒÆ’O DE COLISÃƒÆ’O E LIMPEZA Do RASTRO == */
         if (mapa[proxX][proxY] != '*') {
             x = proxX;
             y = proxY;
@@ -851,7 +851,7 @@ void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
 
 /* === MOVE O MONSTRO Y EM DIRECAO AO JOGADOR === */
-void moverMonstroY(char mapa[15][19], int *monstroX, int *monstroY, int jogadorX, int jogadorY) {
+void moverMonstroY(char mapa[25][26], int *monstroX, int *monstroY, int jogadorX, int jogadorY) {
     int novoX = *monstroX;
     int novoY = *monstroY;
 
@@ -877,7 +877,7 @@ void moverMonstroY(char mapa[15][19], int *monstroX, int *monstroY, int jogadorX
 }
 
 /* === BOSS Z TROCA DE LUGAR COM Y === */
-void trocarBossZcomY(char mapa[15][19], int *zX, int *zY, int *yX, int *yY) {
+void trocarBossZcomY(char mapa[25][26], int *zX, int *zY, int *yX, int *yY) {
     int tempX, tempY;
 
     if (*yX == -1 || *yY == -1) {
@@ -905,7 +905,7 @@ int jogadorEstaDeCostasParaZ(int jogadorX, int jogadorY, int zX, int zY, char si
 }
 
 /* === Z CRIA UM NOVO Y === */
-void criarNovoY(char mapa[15][19], int zX, int zY, int *yX, int *yY) {
+void criarNovoY(char mapa[25][26], int zX, int zY, int *yX, int *yY) {
     int direcoes[4][2] = {{-1,0},{1,0},{0,-1},{0,1}};
     int i, nx, ny;
 
@@ -924,7 +924,7 @@ void criarNovoY(char mapa[15][19], int zX, int zY, int *yX, int *yY) {
 
 
 /* === Z CRIA UM MONSTRO X EM LOCAL ALEATORIO === */
-void criarMonstroXAleatorio(char mapa[15][19], int xMonstros[], int yMonstros[], int *qtdX) {
+void criarMonstroXAleatorio(char mapa[25][26], int xMonstros[], int yMonstros[], int *qtdX) {
     int tentativa;
     int nx, ny;
 
@@ -933,8 +933,8 @@ void criarMonstroXAleatorio(char mapa[15][19], int xMonstros[], int yMonstros[],
     }
 
     for (tentativa = 0; tentativa < 200; tentativa++) {
-        nx = rand() % 15;
-        ny = rand() % 18;
+        nx = rand() % 25;
+        ny = rand() % 25;
 
         if (mapa[nx][ny] == ' ') {
             mapa[nx][ny] = 'X';
@@ -947,7 +947,7 @@ void criarMonstroXAleatorio(char mapa[15][19], int xMonstros[], int yMonstros[],
 }
 
 /* === MOVE OS MONSTROS X DA MASMORRA 3 ALEATORIAMENTE === */
-void moverMonstrosX3(char mapa[15][19], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY) {
+void moverMonstrosX3(char mapa[25][26], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY) {
     int i;
 
     for (i = 0; i < qtdX; i++) {
@@ -985,7 +985,7 @@ void moverMonstrosX3(char mapa[15][19], int xMonstros[], int yMonstros[], int qt
 void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma) {
     char tecla;
     /* Jogador nasce no corredor central do Boss Z. */
-    int x = 1, y = 8;
+    int x = 1, y = 12;
     int proxX, proxY;
     int i, j;
     char simbolo = '>';
@@ -997,29 +997,39 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     int monstroYX = 1;
     int monstroYY = 1;
     /* Z nasce longe do personagem, mas no mesmo corredor central. */
-    int bossZX = 13;
-    int bossZY = 8;
+    int bossZX = 23;
+    int bossZY = 12;
     int xMonstros[50];
     int yMonstros[50];
     int qtdX = 0;
 
     
-    char mapa[15][19] = {
-        "******************",
-        "*Y*  *     *   * *",
-        "* *  D     *   * *",
-        "* *  *     *   * *",
-        "* *  *     *   * *",
-        "* *  *     *   * *",
-        "* *  *     *   * *",
-        "* *  *   @ D   * *",
-        "* *  *     *   * *",
-        "* *  *     *   * *",
-        "* D  *     * O * *",
-        "*@*  *     *   * *",
-        "* *  *     *   * *",
-        "* *@ *     *   * *",
-        "******************"
+    char mapa[25][26] = {
+        "*************************",
+        "*Y   *           *      *",
+        "*    *           *      *",
+        "* @  *           *      *",
+        "*    *           *      *",
+        "*    D           *      *",
+        "*    *           *      *",
+        "*    *           *      *",
+        "*    * ***** *** *      *",
+        "*    *           *      *",
+        "*    *           *      *",
+        "*    *           *      *",
+        "*    *           D      *",
+        "*  @ *           *      *",
+        "*    *           *      *",
+        "*    *           *      *",
+        "*    * ***** *** *      *",
+        "*    *           *      *",
+        "*    D           *      *",
+        "*    *           *      *",
+        "*    *    @      *      *",
+        "*    *           *      *",
+        "*    *           *  O   *",
+        "*    *           *      *",
+        "*************************"
     };
 
     mapa[bossZX][bossZY] = 'Z';
@@ -1034,8 +1044,8 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
         printf("Vidas: %d | Arma: %s | Chave: %s | Use WASD | O Ataca | M Sair\n\n",
                vidas, nomeArma, temChave ? "Sim" : "Nao");
 
-        for (i = 0; i < 15; i++) {
-            for (j = 0; j < 18; j++) {
+        for (i = 0; i < 25; i++) {
+            for (j = 0; j < 25; j++) {
                 imprimirCaractereColorido(mapa[i][j]);
             }
             printf("\n");
@@ -1054,8 +1064,8 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             int alvoY = -1;
             int linha, coluna;
 
-            for (linha = 0; linha < 15; linha++) {
-                for (coluna = 0; coluna < 18; coluna++) {
+            for (linha = 0; linha < 25; linha++) {
+                for (coluna = 0; coluna < 25; coluna++) {
                     if ((mapa[linha][coluna] == 'X' || mapa[linha][coluna] == 'Y' || mapa[linha][coluna] == 'Z') &&
                         estaNaAreaAtaque(x, y, simbolo, nomeArma, linha, coluna)) {
                         alvoX = linha;
@@ -1135,7 +1145,7 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
 
             if (mapa[proxX][proxY] == 'D') {
                 /* Porta da direita do corredor central: so abre depois das duas portas da esquerda. */
-                if (proxX == 7 && proxY == 11 && portasEsquerdaAbertas < 2) {
+                if (proxX == 12 && proxY == 17 && portasEsquerdaAbertas < 2) {
                     printf("\nEsta porta so pode ser aberta depois que as duas portas da esquerda forem abertas.\n");
                     printf("Pressione qualquer tecla para continuar...");
                     getch();
@@ -1146,11 +1156,11 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                     mapa[proxX][proxY] = '=';
 
                     /* Conta as duas portas da esquerda da Masmorra 3. */
-                    if (proxX == 2 && proxY == 5 && portaEsquerda1Aberta == 0) {
+                    if (proxX == 5 && proxY == 5 && portaEsquerda1Aberta == 0) {
                         portaEsquerda1Aberta = 1;
                         portasEsquerdaAbertas++;
                     }
-                    else if (proxX == 10 && proxY == 2 && portaEsquerda2Aberta == 0) {
+                    else if (proxX == 18 && proxY == 5 && portaEsquerda2Aberta == 0) {
                         portaEsquerda2Aberta = 1;
                         portasEsquerdaAbertas++;
                     }
@@ -1170,8 +1180,8 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 int linha, coluna;
 
                 /* Ao apertar o botao, paredes, portas e inimigos somem da tela. */
-                for (linha = 0; linha < 15; linha++) {
-                    for (coluna = 0; coluna < 18; coluna++) {
+                for (linha = 0; linha < 25; linha++) {
+                    for (coluna = 0; coluna < 25; coluna++) {
                         if (mapa[linha][coluna] == '*' || mapa[linha][coluna] == 'D' ||
                             mapa[linha][coluna] == '=' || mapa[linha][coluna] == 'X' ||
                             mapa[linha][coluna] == 'Y' || mapa[linha][coluna] == 'Z') {
@@ -1187,8 +1197,8 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
                 printf("Vidas: %d | Arma: %s | Chave: %s | Use WASD | O Ataca | M Sair\n\n",
                        vidas, nomeArma, temChave ? "Sim" : "Nao");
 
-                for (linha = 0; linha < 15; linha++) {
-                    for (coluna = 0; coluna < 18; coluna++) {
+                for (linha = 0; linha < 25; linha++) {
+                    for (coluna = 0; coluna < 25; coluna++) {
                         imprimirCaractereColorido(mapa[linha][coluna]);
                     }
                     printf("\n");
