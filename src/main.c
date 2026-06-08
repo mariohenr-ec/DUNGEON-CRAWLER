@@ -9,7 +9,7 @@ void exibirTutorial();
 void exibirCreditos();
 void iniciarVila();
 void iniciarMasmorra1(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
-void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);/*2novas funÃƒÂ§oesÃ¢â‚¬Å¡Ãƒâ€šÃ‚Â§oes by mario, masmorra2 e monstro*/
+void iniciarMasmorra2(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void iniciarCorredorFinal(int vidas, char nomeArma[], int alcanceArma, int jaPegouArma);
 void moverMonstroX(char mapa[15][16], int *monstroX, int *monstroY, int jogadorX, int jogadorY);
@@ -19,9 +19,9 @@ int jogadorEstaDeCostasParaZ(int jogadorX, int jogadorY, int zX, int zY, char si
 void criarNovoY(char mapa[25][26], int zX, int zY, int *yX, int *yY);
 void criarMonstroXAleatorio(char mapa[25][26], int xMonstros[], int yMonstros[], int *qtdX);
 void moverMonstrosX3(char mapa[25][26], int xMonstros[], int yMonstros[], int qtdX, int jogadorX, int jogadorY);
-void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores - J */
-void exibirGameOver(); /* Nova funcao adicionada */
-void exibirFinalJogo(); /* Tela final narrativa */
+void imprimirCaractereColorido(char c); /* Nova funcao padrao de cores - */
+void exibirGameOver(); 
+void exibirFinalJogo(); 
 int estaNaAreaAtaque(int jogadorX, int jogadorY, char simbolo, char nomeArma[], int alvoX, int alvoY);
 
 /* === FUNCAO PRINCIPAL === */
@@ -1424,14 +1424,14 @@ void exibirFinalJogo() {
         printf("============================================================\n");
         printf("\033[0m\n");
 
-        printf("Q = Obrigado por me salvar.\n\n");
-        printf("V = Quem e voce? Onde estao os outros?\n");
-        printf("O Z morreu?\n\n");
-        printf("Q = Z os trancafiou e os levou para uma outra vila proxima,\n");
-        printf("sou o unico que restou de la.\n\n");
-        printf("V = Irei atras dele e resgatarei todos, custe o que custar....\n\n");
+        printf("Sobrevivente = Obrigado por me salvar.\n\n");
+        printf("Você = Quem é voce? Onde estao os outros?\n");
+        printf("O Monstro morreu?\n\n");
+        printf("Sobrevivente = Ele os trancafiou e os levou para uma outra vila proxima,\n");
+        printf("sou o unico que restou.\n\n");
+        printf("Você = Irei atras dele e resgatarei todos, custe o que custar....\n\n");
 
-        printf("Com a surpreendente fuga de Z, nosso heroi precisara persegui-lo\n");
+        printf("Com a surpreendente fuga do Demônio, nosso heroi precisara persegui-lo\n");
         printf("e devera descobrir o que mais pode estar acontecendo e em meio\n");
         printf("a tantas incertezas, a unica coisa certa e que ele nao ira parar\n");
         printf("ate que reencontre seus companheiros, onde estiverem....\n\n");
