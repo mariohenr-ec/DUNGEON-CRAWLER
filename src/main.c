@@ -32,7 +32,7 @@ int main() {
     int comando;
     int continuar = 1;
 
-    srand(time(NULL));/*IA adicionou essa, mas n entendi pq by M*/
+    srand(time(NULL));
 
     while (continuar) {
         system("cls");
@@ -236,7 +236,7 @@ void iniciarVila() {
         system("cls");
 
         char caractereOriginal = mapa[x][y];
-        // Coloca o sÃƒÂ­mbolo do jogador na matriz antes de imprimir
+        // Coloca o simbolo do jogador na matriz antes de imprimir
         mapa[x][y] = simbolo;
 
         printf("              --- VILA DE NEOGENESE ---\n\n");
@@ -260,13 +260,13 @@ void iniciarVila() {
             break;
         }
 
-		 /* Guarda a posiÃƒÂ§ÃƒÂ£o pretendida */
+		 /* Guarda a posiçao pretendida */
     	/*aqui usa as variaveis do movimento, sao atualizadas a cada tecla
 				e imprime a nova posicao na matriz */
         proxX = x;
         proxY = y;
 
-		/* == LÃƒâ€œGICA DE MOVIMENTO E DIREÃƒâ€¡ÃƒÆ’O == */
+		/* == Logica de movimentacao e direcao == */
         
         /* OBS: aqui usei um pouco de IA pra aprender essa logica de quando o X ou o Y
         	reduz ou aumenta na matriz */
@@ -364,7 +364,7 @@ void iniciarVila() {
             iniciarMasmorra1(vidas, nomeArma, alcanceArma, jaPegouArma);
             break;
         }
-/* == VERIFICAÃƒâ€¡ÃƒÆ’O DE COLISÃƒÆ’O E LIMPEZA Do RASTRO == */
+/* == VERIFICAR COLISAO E LIMPEZA DO RASTRO == */
         if (mapa[proxX][proxY] != '*') {
             x = proxX;
             y = proxY;
@@ -1009,29 +1009,29 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
     
     char mapa[25][26] = {
         "*************************",
-        "*Y   *           *      *",
-        "*    *           *      *",
-        "* @  *           *      *",
-        "*    *           *      *",
-        "*    D           *      *",
-        "*    *           *      *",
-        "*    *           *      *",
-        "*    * ***** *** *      *",
-        "*    *           *      *",
-        "*    *           *      *",
-        "*    *           *      *",
-        "*    *           D      *",
-        "*  @ *           *      *",
-        "*    *           *      *",
-        "*    *           *      *",
-        "*    * ***** *** *      *",
-        "*    *           *      *",
-        "*    D           *      *",
-        "*    *           *      *",
-        "*    *    @      *      *",
-        "*    *           *      *",
-        "*    *           *  O   *",
-        "*    *           *      *",
+        "*Y   #           #      *",
+        "*    #           #      *",
+        "* @  #           #      *",
+        "*    #           #      *",
+        "*    D           #      *",
+        "*    #           #      *",
+        "*    #           #      *",
+        "*    # ##### ### #      *",
+        "*    #           #      *",
+        "*    #           #      *",
+        "*    #           #      *",
+        "*    #           D      *",
+        "*  @ #           #      *",
+        "*    #           #      *",
+        "*    #           #      *",
+        "*    # #### #### #      *",
+        "*    #           #      *",
+        "*    D           #      *",
+        "*    #           #      *",
+        "*    #    @      #      *",
+        "*    #           #      *",
+        "*    #           #  O   *",
+        "*    #           #      *",
         "*************************"
     };
 
