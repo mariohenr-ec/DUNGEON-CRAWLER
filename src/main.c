@@ -26,9 +26,8 @@ void exibirFinalJogo();
 int estaNaAreaAtaque(int jogadorX, int jogadorY, char simbolo, char nomeArma[], int alvoX, int alvoY);
 
 /* === FUNCAO PRINCIPAL === */
+/* === FUNCAO PRINCIPAL MODIFICADA E ESTILIZADA === */
 int main() {
-	 setlocale(LC_ALL, "Portuguese");
-	 
     int comando;
     int continuar = 1;
 
@@ -37,18 +36,37 @@ int main() {
     while (continuar) {
         system("cls");
 
-        printf("--------------------------------------\n");
-        printf("        DUNGEON CRAWLER: NEOGENESE\n");
-        printf("--------------------------------------\n");
-        printf("1 - Jogar\n");
-        printf("2 - Tutorial\n");
-        printf("3 - Sair / Creditos\n");
-        printf("\nEscolha seu comando (1, 2 ou 3): ");
+        /* Espaçamento superior para centralização vertical */
+        printf("\n\n\n");
+
+        /* Letreiro Grande do título "Neogenese" em Cor Laranja */
+        printf("\033[38;5;208m"); /* Ativa cor Laranja */
+        printf("      ##   ##   ########  #######   ######   ######## ##    ## ########  ######  ######## \n");
+        printf("      ###  ##   ##       ##     ## ##    ##  ##       ###   ## ##       ##    ## ##       \n");
+        printf("      #### ##   ##       ##     ## ##        ##       ####  ## ##       ##       ##       \n");
+        printf("      ## # ##   ######   ##     ## ##   #### ######   ## ## ## ######    ######  ######   \n");
+        printf("      ## ####   ##       ##     ## ##    ##  ##       ##  #### ##      #      ## ##       \n");
+        printf("      ##  ###   ##       ##     ## ##    ##  ##       ##   ### ##       ##    ## ##       \n");
+        printf("      ##   ##   ########  #######   ######   ######## ##    ## ########  ######  ######## \n");
+         
+
+       
+        printf("      ----------------------------------------------------------------------------------\n\n");
+
+        
+        printf("                                    [1] - Jogar\n");
+        printf("                                    [2] - Tutorial\n");
+        printf("                                    [3] - Sair / Creditos\n\n");
+        printf("      ----------------------------------------------------------------------------------\n");
+        printf("\033[0m"); /* Reseta a cor padrão */
+        
+        /* Campo de Input do Usuário */
+        printf("                                    Escolha sua opcao: ");
 
         if (scanf("%d", &comando) != 1) {
-            printf("\nErro: Digite apenas numeros!\n");
+            printf("\n                                 Erro: Digite apenas numeros!\n");
             while (getchar() != '\n');
-            printf("Pressione qualquer tecla para tentar novamente...");
+            printf("                                 Pressione qualquer tecla...");
             getch();
             continue;
         }
@@ -65,8 +83,8 @@ int main() {
                 continuar = 0;
                 break;
             default:
-                printf("\nComando invalido!\n");
-                printf("Pressione qualquer tecla para voltar...");
+                printf("\n                                 Opcao invalida!\n");
+                printf("                                 Pressione qualquer tecla...");
                 getch();
                 break;
         }
