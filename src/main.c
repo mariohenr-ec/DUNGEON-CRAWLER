@@ -1305,6 +1305,25 @@ void iniciarMasmorra3(int vidas, char nomeArma[], int alcanceArma, int jaPegouAr
             exibirGameOver();
             break;
         }
+        
+        if (mapa[proxX][proxY] == '#') {
+            vidas--;
+
+            printf("\nVoce pisou em espinhos e perdeu uma vida!\n");
+
+            if (vidas <= 0) {
+                exibirGameOver();
+                break;
+            }
+
+            printf("Voce voltou ao inicio da fase.\n");
+            printf("Pressione qualquer tecla para continuar...");
+            getch();
+
+            x = 1;
+            y = 12;
+            continue;
+        }
 
     }
 }
