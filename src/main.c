@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-#include <time.h>/*nova regra by M*/
+#include <time.h>
+#include <locale.h> //para deixar portugues certo
 
 /* === PROTOTIPO DAS FUNCOES === */
 void exibirTutorial();
@@ -26,6 +27,8 @@ int estaNaAreaAtaque(int jogadorX, int jogadorY, char simbolo, char nomeArma[], 
 
 /* === FUNCAO PRINCIPAL === */
 int main() {
+	 setlocale(LC_ALL, "Portuguese");
+	 
     int comando;
     int continuar = 1;
 
